@@ -7,6 +7,7 @@ import android.inputmethodservice.Keyboard.Key;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Selection;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -230,8 +232,7 @@ public class KeyboardUtil {
         }
     }
 
-
-    private OnKeyboardActionListener listener = new OnKeyboardActionListener() {
+    private final OnKeyboardActionListener listener = new OnKeyboardActionListener() {
         @Override
         public void swipeUp() {
         }
@@ -250,14 +251,18 @@ public class KeyboardUtil {
 
         @Override
         public void onText(CharSequence text) {
-            if (ed == null)
+            if (ed == null) {
                 return;
+            }
             Editable editable = ed.getText();
 //			if (editable.length()>=20)
 //				return;
             int start = ed.getSelectionStart();
-            int end = ed.getSelectionEnd();
+//            int end = ed.getSelectionEnd();
             String temp = editable.subSequence(0, start) + text.toString() + editable.subSequence(start, editable.length());
+            if (temp.length() > TextViewUtil.getTextViewMaxLength(ed)) {
+                return;
+            }
             ed.setText(temp);
             Editable etext = ed.getText();
             Selection.setSelection(etext, start + 1);

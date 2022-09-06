@@ -13,16 +13,26 @@
             android:id="@+id/normal_ed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nextFocusForward="@+id/special_ed"
+            android:singleLine="true"
             android:hint="普通键盘" />
 
         <EditText
             android:id="@+id/special_ed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="5"
             android:hint="特殊键盘" />
 
+        <EditText
+            android:id="@+id/special_ed2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="5"
+            android:hint="特殊键盘2" />
+
         <TextView
-            android:id="@+id/other_test"
+            android:id="@+id/other_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/content"
