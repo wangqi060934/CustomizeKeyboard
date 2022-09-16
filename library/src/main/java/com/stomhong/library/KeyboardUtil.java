@@ -260,7 +260,8 @@ public class KeyboardUtil {
             int start = ed.getSelectionStart();
 //            int end = ed.getSelectionEnd();
             String temp = editable.subSequence(0, start) + text.toString() + editable.subSequence(start, editable.length());
-            if (temp.length() > TextViewUtil.getTextViewMaxLength(ed)) {
+            int limit = TextViewUtil.getTextViewMaxLength(ed);
+            if (limit >= 0 && temp.length() > limit) {
                 return;
             }
             ed.setText(temp);
